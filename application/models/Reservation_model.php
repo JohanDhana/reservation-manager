@@ -33,9 +33,8 @@ class Reservation_model extends CI_Model
     public function get_reservations_for_event($event_id, $limit = 20, $start = 0)
     {
         $this->db->select('*');
-        $this->db->limit($limit, $start);
         $this->db->where('event_id', $event_id);
-        $query = $this->db->get('reservations');
+        $query = $this->db->get('reservations', $limit, $start);
         $r =   $this->db->last_query();
         return    $query->result_array();
     }

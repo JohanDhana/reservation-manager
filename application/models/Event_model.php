@@ -31,8 +31,7 @@ class Event_model extends CI_Model
 	public function get_events($limit, $start)
 	{
 		$this->db->select('*,(select sum(total_persons)  from reservations where event_id=events.idevents ) as total_ticket');
-		$this->db->limit($limit, $start);
-		$query = $this->db->get('events');
+		$query = $this->db->get('events', $limit, $start);
 		return	$query->result_array();
 	}
 
