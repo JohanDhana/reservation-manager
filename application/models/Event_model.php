@@ -16,31 +16,27 @@ class Event_model extends CI_Model
 
 	public function count_events()
 	{
-		$this->db->select('COUNT(*)');
-		$query = $this->db->get('events');
+		$query =	$this->db->select('COUNT(*)')->get('events');
 		return	$query->row_array();
 	}
 
 	public function get_event_by_id($id)
 	{
-		$this->db->select('*');
-		$query = $this->db->get_where('events', array('idevents' => $id));
+		$query = $this->db->select('*')->get_where('events', array('idevents' => $id));
 		return $query->result_array()[0];
 	}
 
 	public function get_events($limit, $start)
 	{
-		$this->db->select('*,(select sum(total_persons)  from reservations where event_id=events.idevents ) as total_ticket');
-		$query = $this->db->get('events', $limit, $start);
+		$query = $this->db->select('*,(select sum(total_persons)  from reservations where event_id=events.idevents ) as total_ticket')
+			->get('events', $limit, $start);
 		return	$query->result_array();
 	}
 
 
 	public function get_event_image($event_id)
 	{
-		$this->db->select('image');
-		$this->db->where('idevents', $event_id);
-		$query = $this->db->get('events');
+		$query = $this->db->select('image')->where('idevents', $event_id)->get('events');
 		return $query->result_array();
 	}
 
