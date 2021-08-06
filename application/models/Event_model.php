@@ -23,7 +23,7 @@ class Event_model extends CI_Model
 	public function get_event_by_id($id)
 	{
 		$query = $this->db->select('*')->get_where('events', array('idevents' => $id));
-		return $query->result_array()[0];
+		return $query->row_array();
 	}
 
 	public function get_events($limit, $start)
@@ -37,7 +37,7 @@ class Event_model extends CI_Model
 	public function get_event_image($event_id)
 	{
 		$query = $this->db->select('image')->where('idevents', $event_id)->get('events');
-		return $query->result_array();
+		return $query->row_array();
 	}
 
 	public function create_event($img)

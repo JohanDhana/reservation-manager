@@ -35,7 +35,7 @@ class Reservations extends CI_Controller
 		// $this->form_validation->set_rules('payment_status', 'Payment status', 'required');
 
 		if ($this->form_validation->run() === FALSE) {
-			$data['event'] = $this->event_model->get_event_by_id($event_id);
+			$data['event'] = $this->event_model->get_event_image($event_id);
 			$this->load->view('templates/header');
 			$this->load->view('reservations/create_public', $data);
 			$this->load->view('templates/footer');
@@ -64,14 +64,13 @@ class Reservations extends CI_Controller
 		// $this->form_validation->set_rules('payment_status', 'Payment status', 'required');
 
 		if ($this->form_validation->run() === FALSE) {
-			$data['event'] = $this->event_model->get_event_by_id($event_id);
+			$data['event'] = $this->event_model->get_event_image($event_id);
 
 			$this->load->view('templates/header');
 			$this->load->view('reservations/create', $data);
 			$this->load->view('templates/footer');
 		} else {
 			$this->reservation_model->add_reservation($event_id);
-			// Set message
 			header("Refresh:0");
 		}
 	}

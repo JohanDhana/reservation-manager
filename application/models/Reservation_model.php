@@ -16,7 +16,7 @@ class Reservation_model extends CI_Model
     public function get_reservation($id)
     {
         $query = $this->db->select('*')->where('idreservations', $id)->get('reservations');
-        return $query->result_array()[0];
+        return $query->row_array();
     }
 
 
@@ -43,7 +43,7 @@ class Reservation_model extends CI_Model
         $payment = $this->input->post('payment_status') === 'on' ? 1 : 0;
         $name = 'qr-reservation' . $uniqid;
         $qr_data =   $this->generate_qrcode(base_url() . 'reservation/' . $uniqid, $name);
-        $event_image = 'assets/images/events/' . $this->event_model->get_event_image($event_id)[0]['image'];
+        $event_image = 'assets/images/events/' . $this->event_model->get_event_image($event_id)['image'];
         $data = array(
             'idreservations' => $uniqid,
             'name' => $this->input->post('name'),
