@@ -16,7 +16,7 @@ class Event_model extends CI_Model
 
 	public function count_events()
 	{
-		$query =	$this->db->select('COUNT(*)')->get('events');
+		$query = $this->db->select('COUNT(*)')->get('events');
 		return	$query->row_array();
 	}
 
@@ -59,8 +59,7 @@ class Event_model extends CI_Model
 
 	public function delete_event($id)
 	{
-		$this->db->where('idevents', $id);
-		$this->db->delete('events');
+		$this->db->where('idevents', $id)->delete('events');
 		return true;
 	}
 
@@ -71,7 +70,6 @@ class Event_model extends CI_Model
 		$data = array(
 			'date' => $this->input->post('date'),
 			'guest' => $this->input->post('guest'),
-			// 'image' => $img,
 			'ticket_price' => $this->input->post('ticket_price'),
 		);
 

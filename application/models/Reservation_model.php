@@ -16,26 +16,25 @@ class Reservation_model extends CI_Model
     public function get_reservation($id)
     {
         $query = $this->db->select('*')->where('idreservations', $id)->get('reservations');
-        return    $query->result_array()[0];
+        return $query->result_array()[0];
     }
 
 
     public function count_reservations_by_event($event_id)
     {
         $query =  $this->db->select('COUNT(*)')->where('event_id', $event_id)->get('reservations');
-        return    $query->row_array();
+        return $query->row_array();
     }
 
     public function get_reservations_for_event($event_id, $limit = 20, $start = 0)
     {
         $query = $this->db->select('*')->where('event_id', $event_id)->get('reservations', $limit, $start);
-        return    $query->result_array();
+        return $query->result_array();
     }
 
     public function delete_reservation($id)
     {
-        $this->db->where('idreservations', $id);
-        $this->db->delete('reservations');
+        $this->db->where('idreservations', $id)->delete('reservations');
     }
 
     public function add_reservation($event_id)
